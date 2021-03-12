@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "alwaysStrict": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+    "pretty": true,
+    "module": "CommonJS",
+    "target": "ES6",
+    "lib": [
+      "ESNext",
+    ],
+    "typeRoots": ["node_modules/@types"],
+    "types": ["node"],
+    "sourceMap": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmitHelpers": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "outDir": "./dist"
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "exclude": ["dist/**", "node_modules/**"]
+}
