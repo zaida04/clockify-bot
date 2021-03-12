@@ -3,4 +3,5 @@ dist/
 .vscode/
 
 *.sqlite3
-.env
+*.env
+docker-compose.config.yml

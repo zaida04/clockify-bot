@@ -9,21 +9,16 @@
     "target": "ES6",
     "lib": [
       "ESNext",
+      "DOM"
     ],
     "typeRoots": ["node_modules/@types"],
-    "types": ["node"],
-    "sourceMap": true,
-    "incremental": true,
+    "strictNullChecks": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "noEmitHelpers": true,
     "resolveJsonModule": true,
-    "importHelpers": true,
-    "outDir": "./dist"
+    "importHelpers": true
   },
-  "include": [
-    "./src/**/*.ts"
-  ],
-  "exclude": ["dist/**", "node_modules/**"]
+  "exclude": ["dist/**"]
 }

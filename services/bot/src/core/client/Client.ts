@@ -3,10 +3,11 @@ import { join } from "path";
 import { ClientOptions } from "../../typings/ClientOptions";
 
 import "../../typings/Akairo";
-import "../../typings/Guild";
 import Logger from "../../logger/Logger";
+import DatabaseManager from "../managers/DatabaseManager";
+import { DatabaseGuild } from "../../typings/DatabaseGuild";
 
-export default class Client extends AkairoClient {
+export default class ClockifyClient extends AkairoClient {
     public constructor(config: ClientOptions) {
         super(
             {
@@ -20,10 +21,15 @@ export default class Client extends AkairoClient {
 
         this.config = config;
         this.Logger = new Logger();
+        this.db = new DatabaseManager(config.knexConfig, this);
 
         this.commandHandler = new CommandHandler(this, {
             directory: join(__dirname, "/../commands/"),
-            prefix: this.config.defaultPrefix,
+            prefix: async (m) =>
+                m.guild
+                    ? (await this.db.api<DatabaseGuild>("settings").where("guild", m.guild.id).first())?.prefix ??
+                      this.config.defaultPrefix
+                    : this.config.defaultPrefix,
             allowMention: true,
             defaultCooldown: 5000,
         });

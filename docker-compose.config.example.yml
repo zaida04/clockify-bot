@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  bot:
+    environment:
+      POSTGRES_DB: "main"
+      POSTGRES_USER: "main_user"
+      POSTGRES_PASSWORD: "main_pass"
+      DISCORD_TOKEN: ""
+      DISCORD_PREFIX: "c!"
+  pgdb:
+    environment:
+      POSTGRES_DB: "main"
+      POSTGRES_USER: "main_user"
+      POSTGRES_PASSWORD: "main_pass"
