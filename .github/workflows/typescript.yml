@@ -13,8 +13,11 @@ jobs:
         with:
           node-version: 12
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install PNPM
+        run: npm i -g pnpm
 
-      - name: Run TypeScript compiler
-        run: npx tsc
+      - name: Install dependencies
+        run: pnpm i --r
+
+      - name: Run TypeScript Compiler
+        run: pnpm run build
