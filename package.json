@@ -7,7 +7,7 @@
     "dev": "npx rimraf services/bot/dist && npm run build && npm run start:bot",
     "start:bot": "node ./services/bot/dist/index.js",
     "build": "pnpm recursive run build --filter @clockify-bot/*",
-    "lint": "npx eslint src/ --fix",
+    "lint": "npx eslint services/ --fix",
     "knex:init": "knex migrate:latest"
   },
   "repository": {
