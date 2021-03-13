@@ -5,3 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./docker/bot/Dockerfile
+    volumes: 
+      - ./services:/services/
+      - ./node_modules:/node_modules/
+  pgdb:
+    ports:
+      - '127.0.0.1:5432:5432'

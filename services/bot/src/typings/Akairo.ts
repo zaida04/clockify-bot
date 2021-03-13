@@ -11,7 +11,4 @@ declare module "discord-akairo" {
         inhibitorHandler: InhibitorHandler;
         Logger: Logger;
     }
-    interface Command {
-        sub_commands?: string[];
-    }
 }

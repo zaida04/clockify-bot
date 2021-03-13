@@ -94,11 +94,9 @@ export default class HelpCommand extends Command {
                     For additional info on a command, type \`${prefix}help [command]\`
                     
                     **Legend:**
+                    
                     \`<arg>\` - required.
                     \`[arg]\` - optional.
-                    
-                    Commands marked with * are sub commands, with the main command being the name of the category.
-                    For example: "tags create"
 					`,
         );
 
@@ -110,26 +108,12 @@ export default class HelpCommand extends Command {
                     Number(a.reduce((acc: number, val) => acc + val.aliases.length)),
             )
             .values()) {
-            const isModule = Boolean(cat.filter((cmd) => cmd.aliases.length > 0).size === 1);
             const filteredCommands = cat.filter((cmd) => cmd.aliases.length > 0);
-            if (isModule) {
-                const category_name = filteredCommands.first()!.aliases[0];
-                embed.addField(
-                    `❯ ${category_name.charAt(0).toUpperCase() + category_name.slice(1)}*`,
-                    cat
-                        .filter((x) => x instanceof SubCommand)
-                        .first()!
-                        .sub_commands!.map((sub_command) => `\`${sub_command[1]}\``)
-                        .join(" "),
-                    true,
-                );
-            } else {
-                embed.addField(
-                    `❯ ${cat.id.replace(/(\b\w)/gi, (lc) => lc.toUpperCase())}`,
-                    `${filteredCommands.map((cmd) => `\`${cmd.aliases[0]}\``).join(" ")}`,
-                    cat.filter((cmd) => cmd.aliases.length > 0).map((cmd) => `\`${cmd.aliases[0]}\``).length < 3,
-                );
-            }
+            embed.addField(
+                `❯ ${cat.id.replace(/(\b\w)/gi, (lc) => lc.toUpperCase())}`,
+                `${filteredCommands.map((cmd) => `\`${cmd.aliases[0]}\``).join(" ")}`,
+                cat.filter((cmd) => cmd.aliases.length > 0).map((cmd) => `\`${cmd.aliases[0]}\``).length < 3,
+            );
             return message.channel.send(embed);
         }
     }

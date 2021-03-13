@@ -4,4 +4,7 @@ services:
   bot:
     image: zaid450/clockify_discord_bot
     env_file:
-      - ./docker/bot/bot.env
+      - ./docker/bot/bot.env\
+
+  pgdb:
+    image: zaid450/clockify_discord_bot_db

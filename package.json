@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "npx rimraf services/bot/dist && npm run build && npm run start:bot",
     "start:bot": "node ./services/bot/dist/index.js",
+    "start:bot:prod": "pnpm run knex:init && pnpm run start:bot",
     "build": "pnpm recursive run build --filter @clockify-bot/*",
     "lint": "npx eslint services/ --fix",
-    "knex:init": "knex migrate:latest"
+    "knex:init": "npx knex migrate:latest"
   },
   "repository": {
     "type": "git",
@@ -32,15 +33,10 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.1.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.0.2"
-  },
-  "dependencies": {
-    "discord-akairo": "^8.1.0",
-    "discord.js": "^12.3.1",
+    "typescript": "^4.0.2",
     "dotenv": "^8.2.0",
     "knex": "^0.95.2",
-    "pg": "^8.5.1",
-    "tslib": "^2.1.0"
+    "pg": "^8.5.1"
   },
   "prettier": {
     "semi": true,

@@ -1,21 +1,26 @@
 import Client from "./core/client/Client";
-import { config } from "dotenv";
 import { ClientOptions } from "./typings/ClientOptions";
 import { join } from "path";
-
-if (process.env.NODE_ENV !== "production") config({ path: join(__dirname, "..", "..", "..", "bot.env") });
-
+import { config } from "dotenv";
 // @ts-ignore
 import knexConfig from "../../../knexfile";
 
-if (!process.env.DEFAULT_PREFIX) throw new Error("Must provide a prefix!");
-if (!process.env.DISCORD_TOKEN) throw new Error("Must provide a token!");
-if (!process.env.DATABASE_URI) throw new Error("Must provide database URI!");
+const main = async () => {
+    if (process.env.NODE_ENV !== "production") {
+        config({ path: join(__dirname, "..", "..", "..", "bot.env") });
+    }
 
-const options: ClientOptions = {
-    knexConfig,
-    defaultPrefix: process.env.DEFAULT_PREFIX,
+    if (!process.env.DEFAULT_PREFIX) throw new Error("Must provide a prefix!");
+    if (!process.env.DISCORD_TOKEN) throw new Error("Must provide a token!");
+    if (!process.env.POSTGRES_DB) throw new Error("Must provide a Postgres DB name");
+    if (!process.env.POSTGRES_USER) throw new Error("Must provide a Postgres DB user");
+    if (!process.env.POSTGRES_PASSWORD) throw new Error("Must provide a Postgres DB password");
+
+    const BotClient = new Client({
+        knexConfig,
+        defaultPrefix: process.env.DEFAULT_PREFIX,
+    });
+    void BotClient.login(process.env.DISCORD_TOKEN);
 };
 
-const BotClient = new Client(options);
-void BotClient.login(process.env.DISCORD_TOKEN);
+main();
